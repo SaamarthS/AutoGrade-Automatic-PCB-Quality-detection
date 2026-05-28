@@ -1494,9 +1494,16 @@ if image_source is not None:
     annotated_tmp = tmp_path.replace('.jpg', '_annotated.jpg')
     cv2.imwrite(annotated_tmp, cv2.cvtColor(annotated_img, cv2.COLOR_RGB2BGR))
 
-    # ── Auto-log this inspection ─────────────────────────
-    _src = 'camera' if (camera_image is not None and image_source is camera_image) else 'upload'
-    log_inspection(result, annotated_tmp, source=_src)
+    # ── Auto-log this inspection (only once per image) ───────
+    if 'logged_images' not in st.session_state:
+        st.session_state.logged_images = set()
+        
+    file_uid = getattr(image_source, "file_id", getattr(image_source, "name", "unknown"))
+    
+    if file_uid not in st.session_state.logged_images:
+        _src = 'camera' if (camera_image is not None and image_source is camera_image) else 'upload'
+        log_inspection(result, annotated_tmp, source=_src)
+        st.session_state.logged_images.add(file_uid)
 
     # ── Groq status badge ────────────────────────────────
     if groq_err:
