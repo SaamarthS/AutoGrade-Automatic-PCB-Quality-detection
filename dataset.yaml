@@ -1,0 +1,12 @@
+names:
+- open
+- short
+- mousebite
+- spur
+- copper
+- pin-hole
+nc: 6
+path: /content/PCB-defect-detection/preprocessed_data
+test: /content/PCB-defect-detection/preprocessed_data/images/val
+train: /content/PCB-defect-detection/preprocessed_data/images/train
+val: /content/PCB-defect-detection/preprocessed_data/images/val
