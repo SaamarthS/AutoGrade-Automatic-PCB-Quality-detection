@@ -118,6 +118,11 @@ st.markdown("""
   }
   [data-testid="stSidebar"] * { color: var(--text-primary) !important; }
   [data-testid="stSidebar"] .stMarkdown h3 { color: var(--accent) !important; }
+  
+  [data-testid="collapsedControl"] svg {
+    color: var(--text-primary) !important;
+    fill: var(--text-primary) !important;
+  }
 
   /* ── METRIC CARDS ── */
   [data-testid="metric-container"] {
