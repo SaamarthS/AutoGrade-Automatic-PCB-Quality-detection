@@ -196,11 +196,16 @@ st.markdown("""
   .stDataFrame td { color: var(--text-primary) !important; }
 
   /* ── FILE UPLOADER ── */
-  [data-testid="stFileUploader"] {
+  [data-testid="stFileUploader"],
+  [data-testid="stFileUploader"] > section {
     background: var(--bg-surface) !important;
     border: 2px dashed var(--border) !important;
     border-radius: 12px !important;
     padding: 8px !important;
+  }
+  /* Fix inner dropzone background specifically */
+  [data-testid="stFileUploadDropzone"] {
+    background: var(--bg-surface2) !important;
   }
   /* Target text nodes explicitly — do NOT use * which leaks into hidden a11y spans */
   [data-testid="stFileUploader"] label,
