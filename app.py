@@ -1266,13 +1266,19 @@ with st.sidebar:
 # ── Input Tabs ──────────────────────────────────────────
 tab_upload, tab_camera = st.tabs(["📁  Upload Image", "📷  Capture PCB"])
 
+if 'uploader_key' not in st.session_state:
+    st.session_state.uploader_key = 0
+if 'camera_key' not in st.session_state:
+    st.session_state.camera_key = 0
+
 image_source = None
 
 with tab_upload:
     uploaded_file = st.file_uploader(
         "Upload PCB Image",
         type=["jpg", "jpeg", "png"],
-        help="Supported formats: JPG, PNG"
+        help="Supported formats: JPG, PNG",
+        key=f"upload_{st.session_state.uploader_key}"
     )
     if uploaded_file:
         image_source = uploaded_file
@@ -1285,7 +1291,7 @@ with tab_camera:
     </p>
     """, unsafe_allow_html=True)
 
-    camera_image = st.camera_input("", label_visibility="collapsed")
+    camera_image = st.camera_input("", label_visibility="collapsed", key=f"camera_{st.session_state.camera_key}")
 
     # ── Rectangle overlay on live webcam feed ──────────────
     st.markdown("""
@@ -1379,6 +1385,8 @@ if image_source is not None:
             </div>
             """, unsafe_allow_html=True)
             if st.button("🔄 Retake / Re-upload Image", use_container_width=True):
+                st.session_state.uploader_key += 1
+                st.session_state.camera_key += 1
                 st.rerun()
             os.unlink(tmp_path)
             st.stop()
