@@ -132,7 +132,7 @@ def compute_metrics(df: pd.DataFrame) -> str:
     lines   = [
         "=" * 52,
         f"  AutoGrade — Batch Evaluation Metrics",
-        f"  Generated: {datetime.datetime.now().strftime('%d %b %Y %H:%M')}",
+        f"  Generated: {datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5, minutes=30))).strftime('%d %b %Y %H:%M')}",
         "=" * 52,
         f"  Images evaluated : {total}",
         f"  Overall accuracy : {acc:.1f}%  ({correct}/{total} correct)",

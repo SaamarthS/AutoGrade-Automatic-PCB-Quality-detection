@@ -77,7 +77,8 @@ def log_inspection(result: dict, annotated_path: str, source: str = 'upload') ->
     annotated_path: absolute path to the annotated JPEG on disk
     source        : 'upload' | 'camera'
     """
-    now      = datetime.datetime.now()
+    IST      = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+    now      = datetime.datetime.now(IST)
     ts_file  = now.strftime('%Y%m%d_%H%M%S')
     ts_human = now.strftime('%Y-%m-%d %H:%M:%S')
 

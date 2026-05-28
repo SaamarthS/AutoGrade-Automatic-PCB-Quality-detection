@@ -687,7 +687,8 @@ def preprocess_pcb(image_path, use_clahe=True, clahe_clip=2.0, clahe_grid=8,
 # ──────────────────────────────────────────────────────────────────────────────
 def generate_pdf(result, original_path, annotated_path):
     buf  = BytesIO()
-    now  = datetime.datetime.now()
+    IST  = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+    now  = datetime.datetime.now(IST)
     grade = result['grade']
     score = result['score']
 
@@ -1610,7 +1611,7 @@ if image_source is not None:
     st.download_button(
         label="⬇️ Download PDF Report",
         data=pdf_bytes,
-        file_name=f"AutoGrade_{grade}_{score}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf",
+        file_name=f"AutoGrade_{grade}_{score}_{datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5, minutes=30))).strftime('%Y%m%d_%H%M%S')}.pdf",
         mime="application/pdf",
         use_container_width=True
     )
